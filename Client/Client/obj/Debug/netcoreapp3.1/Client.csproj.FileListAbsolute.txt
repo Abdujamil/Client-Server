@@ -1,0 +1,26 @@
+C:\VisualStudio\TCP\Client\Client\bin\Debug\netcoreapp3.1\Client.exe
+C:\VisualStudio\TCP\Client\Client\bin\Debug\netcoreapp3.1\Client.deps.json
+C:\VisualStudio\TCP\Client\Client\bin\Debug\netcoreapp3.1\Client.runtimeconfig.json
+C:\VisualStudio\TCP\Client\Client\bin\Debug\netcoreapp3.1\Client.runtimeconfig.dev.json
+C:\VisualStudio\TCP\Client\Client\bin\Debug\netcoreapp3.1\Client.dll
+C:\VisualStudio\TCP\Client\Client\bin\Debug\netcoreapp3.1\Client.pdb
+C:\VisualStudio\TCP\Client\Client\obj\Debug\netcoreapp3.1\Client.AssemblyInfoInputs.cache
+C:\VisualStudio\TCP\Client\Client\obj\Debug\netcoreapp3.1\Client.AssemblyInfo.cs
+C:\VisualStudio\TCP\Client\Client\obj\Debug\netcoreapp3.1\Client.csproj.CoreCompileInputs.cache
+C:\VisualStudio\TCP\Client\Client\obj\Debug\netcoreapp3.1\Client.dll
+C:\VisualStudio\TCP\Client\Client\obj\Debug\netcoreapp3.1\Client.pdb
+C:\VisualStudio\TCP\Client\Client\obj\Debug\netcoreapp3.1\Client.genruntimeconfig.cache
+C:\VisualStudio\TCP\Client\Client\obj\Debug\netcoreapp3.1\Client.csprojAssemblyReference.cache
+C:\Users\gaffo\OneDrive\Рабочий стол\Client-server\Client\Client\bin\Debug\netcoreapp3.1\Client.exe
+C:\Users\gaffo\OneDrive\Рабочий стол\Client-server\Client\Client\bin\Debug\netcoreapp3.1\Client.deps.json
+C:\Users\gaffo\OneDrive\Рабочий стол\Client-server\Client\Client\bin\Debug\netcoreapp3.1\Client.runtimeconfig.json
+C:\Users\gaffo\OneDrive\Рабочий стол\Client-server\Client\Client\bin\Debug\netcoreapp3.1\Client.runtimeconfig.dev.json
+C:\Users\gaffo\OneDrive\Рабочий стол\Client-server\Client\Client\bin\Debug\netcoreapp3.1\Client.dll
+C:\Users\gaffo\OneDrive\Рабочий стол\Client-server\Client\Client\bin\Debug\netcoreapp3.1\Client.pdb
+C:\Users\gaffo\OneDrive\Рабочий стол\Client-server\Client\Client\obj\Debug\netcoreapp3.1\Client.csprojAssemblyReference.cache
+C:\Users\gaffo\OneDrive\Рабочий стол\Client-server\Client\Client\obj\Debug\netcoreapp3.1\Client.AssemblyInfoInputs.cache
+C:\Users\gaffo\OneDrive\Рабочий стол\Client-server\Client\Client\obj\Debug\netcoreapp3.1\Client.AssemblyInfo.cs
+C:\Users\gaffo\OneDrive\Рабочий стол\Client-server\Client\Client\obj\Debug\netcoreapp3.1\Client.csproj.CoreCompileInputs.cache
+C:\Users\gaffo\OneDrive\Рабочий стол\Client-server\Client\Client\obj\Debug\netcoreapp3.1\Client.dll
+C:\Users\gaffo\OneDrive\Рабочий стол\Client-server\Client\Client\obj\Debug\netcoreapp3.1\Client.pdb
+C:\Users\gaffo\OneDrive\Рабочий стол\Client-server\Client\Client\obj\Debug\netcoreapp3.1\Client.genruntimeconfig.cache

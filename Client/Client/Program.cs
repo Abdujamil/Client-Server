@@ -3,9 +3,9 @@ using System.Net;
 
 namespace Client
 {
-    public class Programm
-    {
-        static int Port;
+	public class Programm
+	{
+		static int Port;
 		static IPAddress ServerIp;
 
 		static void Main(string[] args)
@@ -27,5 +27,5 @@ namespace Client
 			}
 
 		}
-    }
+	}
 }

@@ -6,14 +6,13 @@ using System.Threading;
 
 namespace Client
 {
-	class ClientObject
-	{
+    class ClientObject
+    {
         private const int TimeBetweenRequests = 1600;
 
         private TcpClient Client;
         private NetworkStream Stream;
         private Random rnd = new Random();
-        private static string[] randomRequests = new[] { "Рандомный запрос!", "Покажи мое число!?", "Запрашиваю число от 10 до 20!", "Делаю запрос на число от 10 до 20" };
 
         public void Connect(IPAddress serverIp, int port)
         {
@@ -32,7 +31,7 @@ namespace Client
         {
             while (true)
             {
-				var message = randomRequests[rnd.Next(2)];
+                var message = (rnd.Next(10) + 10).ToString();
                 byte[] data = Encoding.Unicode.GetBytes(message);
                 Stream.Write(data);
                 Console.WriteLine("Клиент: " + message);
@@ -54,10 +53,10 @@ namespace Client
                 }
                 while (true);
             }
-            catch(Exception ex)
-			{
-				Console.WriteLine("На данный момент сервер отключен - {0}" , ex);
-			}
+            catch (Exception ex)
+            {
+                Console.WriteLine("На данный момент сервер отключен - {0}", ex);
+            }
         }
     }
 }

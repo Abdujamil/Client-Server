@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
@@ -7,16 +8,16 @@ using System.Threading.Tasks;
 
 namespace Server
 {
-	class ClientObject
-	{
+    class ClientObject
+    {
         private const int RequestProcessingTime = 7000;
         public string Id { get; private set; }
 
         public NetworkStream Stream { get; private set; }
 
-        private readonly Random _rnd = new Random();
         private readonly TcpClient _tcpClient;
         private readonly ServerObject _serverObject;
+        private readonly List<Tuple<string, string>> _dubletMessages;
 
         public ClientObject(TcpClient tcpClient, ServerObject serverObject)
         {
@@ -24,6 +25,7 @@ namespace Server
             _tcpClient = tcpClient;
             _serverObject = serverObject;
             serverObject.AddClent(this);
+            _dubletMessages = new List<Tuple<string, string>>();
         }
 
         public void Process()
@@ -31,7 +33,7 @@ namespace Server
             try
             {
                 Stream = _tcpClient.GetStream();
-				Console.WriteLine($"Клиент с номером потока {_serverObject.GetClientNumber(Id)} - подключился");
+                Console.WriteLine($"Клиент с номером потока {_serverObject.GetClientNumber(Id)} подключился");
 
                 while (true)
                 {
@@ -43,8 +45,8 @@ namespace Server
                             if (message == null)
                                 continue;
 
-                            if(!_serverObject.DupletCheck(Id,message))
-							{
+                            if (!_serverObject.DupletCheck(Id, message))
+                            {
                                 if (!_serverObject.IsServerBusy(Id, message))
                                 {
                                     _serverObject.AddMessage(Id, message);
@@ -53,15 +55,16 @@ namespace Server
                                     ProcessingMessageAsync(processingMessage);
                                 }
                                 else
-								{
+                                {
                                     var attention = "Сервер не закончил обработку предыдущего запроса!";
                                     SendMessage(attention);
                                 }
 
-							}
+                            }
                             else
                             {
-                                var attention = "Запрос уже обрабатывается!";
+                                _dubletMessages.Add(Tuple.Create(Id, message));
+                                var attention = "Такой запрос уже обрабатывается!";
                                 SendMessage(attention);
                             }
                         }
@@ -74,7 +77,7 @@ namespace Server
                     }
                     catch
                     {
-                        string message = String.Format($"Клиент с номером потока {_serverObject.GetClientNumber(Id)} - отключился");
+                        string message = String.Format($"Клиент с номером потока {_serverObject.GetClientNumber(Id)} отключился");
                         Console.WriteLine(message);
                         break;
                     }
@@ -96,10 +99,11 @@ namespace Server
             await Task.Run(() =>
             {
                 Thread.Sleep(RequestProcessingTime);
-                Console.WriteLine($"Номер клиента {_serverObject.GetClientNumber(Id)}, " + DateTime.Now.ToShortTimeString() + ": " + message.ToString());
-                var messageWithValue = message.ToString() + ": " + _rnd.Next(10, 20);
+                var messageWithValue = "Число " + message.ToString() + " обработано!";
+                Console.WriteLine($"Номер клиента {_serverObject.GetClientNumber(Id)}, " + DateTime.Now.ToShortTimeString() + ": " + messageWithValue);
                 SendMessage(messageWithValue);
                 _serverObject.RemoveMessage(Id, message);
+                _dubletMessages.Clear();
             });
         }
 

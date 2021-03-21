@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\gaffo\\OneDrive\\Рабочий стол\\Client-server\\Client\\Client\\Client.csproj": {}
+    "C:\\Users\\gaffo\\source\\repos\\Client-Server\\Client\\Client\\Client.csproj": {}
   },
   "projects": {
-    "C:\\Users\\gaffo\\OneDrive\\Рабочий стол\\Client-server\\Client\\Client\\Client.csproj": {
+    "C:\\Users\\gaffo\\source\\repos\\Client-Server\\Client\\Client\\Client.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\gaffo\\OneDrive\\Рабочий стол\\Client-server\\Client\\Client\\Client.csproj",
+        "projectUniqueName": "C:\\Users\\gaffo\\source\\repos\\Client-Server\\Client\\Client\\Client.csproj",
         "projectName": "Client",
-        "projectPath": "C:\\Users\\gaffo\\OneDrive\\Рабочий стол\\Client-server\\Client\\Client\\Client.csproj",
+        "projectPath": "C:\\Users\\gaffo\\source\\repos\\Client-Server\\Client\\Client\\Client.csproj",
         "packagesPath": "C:\\Users\\gaffo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\gaffo\\OneDrive\\Рабочий стол\\Client-server\\Client\\Client\\obj\\",
+        "outputPath": "C:\\Users\\gaffo\\source\\repos\\Client-Server\\Client\\Client\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\gaffo\\AppData\\Roaming\\NuGet\\NuGet.Config",

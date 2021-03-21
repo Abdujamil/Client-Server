@@ -37,3 +37,16 @@ C:\Users\gaffo\OneDrive\Рабочий стол\Client-server\Server\Server\obj\
 C:\Users\gaffo\OneDrive\Рабочий стол\Client-server\Server\Server\obj\Debug\netcoreapp3.1\Server.dll
 C:\Users\gaffo\OneDrive\Рабочий стол\Client-server\Server\Server\obj\Debug\netcoreapp3.1\Server.pdb
 C:\Users\gaffo\OneDrive\Рабочий стол\Client-server\Server\Server\obj\Debug\netcoreapp3.1\Server.genruntimeconfig.cache
+C:\Users\gaffo\source\repos\Client-Server\Server\Server\bin\Debug\netcoreapp3.1\Server.exe
+C:\Users\gaffo\source\repos\Client-Server\Server\Server\bin\Debug\netcoreapp3.1\Server.deps.json
+C:\Users\gaffo\source\repos\Client-Server\Server\Server\bin\Debug\netcoreapp3.1\Server.runtimeconfig.json
+C:\Users\gaffo\source\repos\Client-Server\Server\Server\bin\Debug\netcoreapp3.1\Server.runtimeconfig.dev.json
+C:\Users\gaffo\source\repos\Client-Server\Server\Server\bin\Debug\netcoreapp3.1\Server.dll
+C:\Users\gaffo\source\repos\Client-Server\Server\Server\bin\Debug\netcoreapp3.1\Server.pdb
+C:\Users\gaffo\source\repos\Client-Server\Server\Server\obj\Debug\netcoreapp3.1\Server.csprojAssemblyReference.cache
+C:\Users\gaffo\source\repos\Client-Server\Server\Server\obj\Debug\netcoreapp3.1\Server.AssemblyInfoInputs.cache
+C:\Users\gaffo\source\repos\Client-Server\Server\Server\obj\Debug\netcoreapp3.1\Server.AssemblyInfo.cs
+C:\Users\gaffo\source\repos\Client-Server\Server\Server\obj\Debug\netcoreapp3.1\Server.csproj.CoreCompileInputs.cache
+C:\Users\gaffo\source\repos\Client-Server\Server\Server\obj\Debug\netcoreapp3.1\Server.dll
+C:\Users\gaffo\source\repos\Client-Server\Server\Server\obj\Debug\netcoreapp3.1\Server.pdb
+C:\Users\gaffo\source\repos\Client-Server\Server\Server\obj\Debug\netcoreapp3.1\Server.genruntimeconfig.cache

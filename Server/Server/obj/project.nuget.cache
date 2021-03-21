@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "VOdUwy4IWu3oYelg7zvvkFmqc613XtkkR+2Yg2GUVlI0SxM3tG6y+mKqYukGPmLFRDfhkY5XGiypW8AjlcAmwQ==",
+  "dgSpecHash": "oUN9/NfoRpFenLck8L/B2H+zC3auTFUa4lmVMHpu9AMED25E3c7LbaD1HyPTdH5PT2XYWNwx2Vgj2VVlDOaBKA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\gaffo\\OneDrive\\Рабочий стол\\Client-server\\Server\\Server\\Server.csproj",
+  "projectFilePath": "C:\\Users\\gaffo\\source\\repos\\Client-Server\\Server\\Server\\Server.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

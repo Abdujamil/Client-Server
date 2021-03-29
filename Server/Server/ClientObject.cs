@@ -1,23 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Linq;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-
 namespace Server
 {
     class ClientObject
     {
-        private const int RequestProcessingTime = 7000;
         public string Id { get; private set; }
+
+        public int ClientNumber { get; set; }
 
         public NetworkStream Stream { get; private set; }
 
         private readonly TcpClient _tcpClient;
         private readonly ServerObject _serverObject;
-        private readonly List<Tuple<string, string>> _dubletMessages;
 
         public ClientObject(TcpClient tcpClient, ServerObject serverObject)
         {
@@ -25,7 +24,6 @@ namespace Server
             _tcpClient = tcpClient;
             _serverObject = serverObject;
             serverObject.AddClent(this);
-            _dubletMessages = new List<Tuple<string, string>>();
         }
 
         public void Process()
@@ -33,38 +31,26 @@ namespace Server
             try
             {
                 Stream = _tcpClient.GetStream();
-                Console.WriteLine($"Клиент с номером потока {_serverObject.GetClientNumber(Id)} подключился");
+                Console.WriteLine($"Клиент с номером потока {ClientNumber} подключился");
 
                 while (true)
                 {
                     try
                     {
-                        if (_serverObject.GetClientNumber(Id) <= 4)
+                        if (ClientNumber <= 4)
                         {
                             var message = GetMessage();
                             if (message == null)
                                 continue;
 
-                            if (!_serverObject.DupletCheck(Id, message))
+                            if (!_serverObject.IsServerBusy(Id, message))
                             {
-                                if (!_serverObject.IsServerBusy(Id, message))
-                                {
-                                    _serverObject.AddMessage(Id, message);
-
-                                    var processingMessage = message;
-                                    ProcessingMessageAsync(processingMessage);
-                                }
-                                else
-                                {
-                                    var attention = "Сервер не закончил обработку предыдущего запроса!";
-                                    SendMessage(attention);
-                                }
-
+                                var processingMessage = message;
+                                ProcessingMessageAsync(processingMessage);
                             }
                             else
                             {
-                                _dubletMessages.Add(Tuple.Create(Id, message));
-                                var attention = "Такой запрос уже обрабатывается!";
+                                var attention = "Сервер не закончил обработку предыдущего запроса!";
                                 SendMessage(attention);
                             }
                         }
@@ -77,7 +63,7 @@ namespace Server
                     }
                     catch
                     {
-                        string message = String.Format($"Клиент с номером потока {_serverObject.GetClientNumber(Id)} отключился");
+                        string message = String.Format($"Клиент с номером потока {ClientNumber} отключился");
                         Console.WriteLine(message);
                         break;
                     }
@@ -96,15 +82,35 @@ namespace Server
 
         private async void ProcessingMessageAsync(string message)
         {
-            await Task.Run(() =>
+            if (!_serverObject.DupletCheck(Id, message))
             {
-                Thread.Sleep(RequestProcessingTime);
-                var messageWithValue = "Число " + message.ToString() + " обработано!";
-                Console.WriteLine($"Номер клиента {_serverObject.GetClientNumber(Id)}, " + DateTime.Now.ToShortTimeString() + ": " + messageWithValue);
-                SendMessage(messageWithValue);
-                _serverObject.RemoveMessage(Id, message);
-                _dubletMessages.Clear();
-            });
+                await Task.Run(() =>
+                {
+                    _serverObject.AddMessage(Id, message);
+                    Thread.Sleep(RequestProcessingTime);
+
+                    var messageWithValue = "Число " + message.ToString() + " обработано!";
+                    SendMessage(messageWithValue);
+                    Console.WriteLine($"Номер клиента {ClientNumber}, " + DateTime.Now.ToShortTimeString() + ": " + messageWithValue);
+
+                    var listId = _serverObject.DupletMessages.Select(m => m.Item1);
+                    var clientsId = listId.Distinct();
+                    foreach (var id in clientsId)
+                    {
+                        var client = _serverObject.clients.FirstOrDefault(c => c.Id == id);
+                        client.SendMessage(messageWithValue);
+                        Console.WriteLine($"Номер клиента {client.ClientNumber}, " + DateTime.Now.ToShortTimeString() + ": " + messageWithValue);
+                    }
+                    _serverObject.RemoveMessage(Id, message);
+                    _serverObject.ClearDuplet(message);
+                });
+            }
+            else
+            {
+                _serverObject.AddDupletMessage(Id, message);
+                var attention = "Такой запрос уже обрабатывается!";
+                SendMessage(attention);
+            }
         }
 
         private string GetMessage()
@@ -139,5 +145,7 @@ namespace Server
             if (_tcpClient != null)
                 _tcpClient.Close();
         }
+
+        private const int RequestProcessingTime = 7000;
     }
 }

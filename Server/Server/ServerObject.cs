@@ -11,12 +11,15 @@ namespace Server
 	{
 		public List<ClientObject> clients;
 		private readonly List<Tuple<string, string>> _messages;
+		public List<Tuple<string, string>> DupletMessages;
+
 		static TcpListener tcpListener;
 
 		public ServerObject()
 		{
 			clients = new List<ClientObject>();
 			_messages = new List<Tuple<string, string>>();
+			DupletMessages = new List<Tuple<string, string>>();
 		}
 
 		public void Listen(IPAddress serverIp, int port)
@@ -45,6 +48,39 @@ namespace Server
 
 		public void AddClent(ClientObject clientObject)
 		{
+			var clientNumber = 0;
+			if (clients.Count == 0)
+				clientObject.ClientNumber = clientNumber;
+			else
+			{
+				var clientsNumber = clients.OrderBy(c => c.ClientNumber).Select(c => c.ClientNumber).ToArray();
+				var clientMaxNumber = clientsNumber.Max();
+				if (clientMaxNumber == 0)
+				{
+					clientObject.ClientNumber = 1;
+				}
+				else
+				{
+					for (var i = 0; i <= clientMaxNumber; i++)
+					{
+						if (clientsNumber[i] == clientNumber)
+						{
+							clientNumber++;
+						}
+						else
+						{
+							break;
+						}
+					}
+					if (clientNumber == clientMaxNumber)
+						clientObject.ClientNumber = clientNumber + 1;
+					else
+					{
+						clientObject.ClientNumber = clientNumber;
+					}
+				}
+			}
+
 			clients.Add(clientObject);
 		}
 
@@ -55,20 +91,18 @@ namespace Server
 				clients.Remove(client);
 		}
 
-		public int GetClientNumber(string id)
-		{
-			ClientObject client = clients.FirstOrDefault(c => c.Id == id);
-			if (client != null)
-				return clients.IndexOf(client);
-			return 0;
-		}
-
 		#endregion
 
 		public void AddMessage(string Id, string message)
 		{
 			_messages.Add(Tuple.Create(Id, message));
 		}
+
+		public void AddDupletMessage(string Id, string message)
+		{
+			DupletMessages.Add(Tuple.Create(Id, message));
+		}
+
 		public void RemoveMessage(string Id, string message)
 		{
 			var messageForRemove = _messages.FirstOrDefault(o => o.Item1 == Id && o.Item2 == message);
@@ -79,8 +113,19 @@ namespace Server
 		}
 		public bool DupletCheck(string Id, string message)
 		{
-			return _messages.Any(m => m.Item1 == Id && m.Item2 == message);
+			if (_messages.Any(m => m.Item2 == message))
+			{
+				DupletMessages.Add(new Tuple<string, string>(Id, message));
+				return true;
+			}
+			return false;
 		}
+
+		public void ClearDuplet(string message)
+		{
+			DupletMessages = DupletMessages.Where(m => m.Item2 != message).ToList();
+		}
+
 		public bool IsServerBusy(string Id, string message)
 		{
 			return _messages.Any(m => m.Item1 == Id && m.Item2 != message);
